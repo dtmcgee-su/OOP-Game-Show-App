@@ -25,7 +25,6 @@ class Phrase {
         };
  
         console.log(phraseUsed);
-        console.log(phraseUsed);
         console.log(phraseDiv);
     };
 }

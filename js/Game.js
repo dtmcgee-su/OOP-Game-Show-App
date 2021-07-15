@@ -14,18 +14,18 @@ class Game {
         ];
         this.activePhrase = null;
     }
-/**
-  * Selects random phrase from phrases property
-  * @return {Object} Phrase object chosen to be used
-*/
-    getRandomPhrase(){
+    /**
+      * Selects random phrase from phrases property
+      * @return {Object} Phrase object chosen to be used
+    */
+    getRandomPhrase() {
         const randomPhrase = Math.floor(Math.random() * game.phrases.length);
         return game.phrases[randomPhrase];
     };
-/**
-    * Begins game by selecting a random phrase and displaying it to user
-*/
-    startGame(){
+    /**
+        * Begins game by selecting a random phrase and displaying it to user
+    */
+    startGame() {
         const overlay = document.getElementById('overlay');
         overlay.style.display = 'none';
         const randomPhrase = this.getRandomPhrase();
@@ -34,4 +34,37 @@ class Game {
         this.activePhrase = addPhrase;
         console.log(overlay);
     };
-}
+
+    // handleInteraction() {
+
+    checkLetter(letter) {
+        let currentPhrase = game.activePhrase.phrase;
+        if (currentPhrase.includes(letter)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+     showMatchedLetter(letter){
+        let currentPhrase = game.activePhrase.phrase;
+        for (let i = 0; i < currentPhrase.length; i++) {
+            if (currentPhrase[i] === letter) {
+                const selectedLetter = document.querySelector(`${letter}`);
+            }
+        }
+     };
+
+    // checkForWin(){
+
+    // };
+
+    // removeLife(){
+
+    // };
+
+    // gameOver(gameWon){
+
+    // };
+    // };
+};
