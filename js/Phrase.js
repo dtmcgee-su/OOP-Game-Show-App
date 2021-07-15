@@ -27,4 +27,21 @@ class Phrase {
         console.log(phraseUsed);
         console.log(phraseDiv);
     };
-}
+
+    checkLetter(letter) {
+        if (this.phrase.includes(letter)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+     showMatchedLetter(letter){
+        const characters = Array.from(document.getElementsByClassName(letter));
+        //console.log(characters);
+        characters.forEach(correctGuess => {
+            correctGuess.classList.remove('hide');
+            correctGuess.classList.add('show');
+        });
+        };
+};

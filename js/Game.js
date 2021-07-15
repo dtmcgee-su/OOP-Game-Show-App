@@ -32,32 +32,15 @@ class Game {
         const addPhrase = new Phrase(randomPhrase.phrase);
         addPhrase.addPhraseToDisplay();
         this.activePhrase = addPhrase;
-        console.log(overlay);
+        //console.log(overlay);
     };
 
     // handleInteraction() {
 
-    checkLetter(letter) {
-        let currentPhrase = game.activePhrase.phrase;
-        if (currentPhrase.includes(letter)) {
-            return true;
-        } else {
-            return false;
-        }
+
+    checkForWin(){
+
     };
-
-     showMatchedLetter(letter){
-        let currentPhrase = game.activePhrase.phrase;
-        for (let i = 0; i < currentPhrase.length; i++) {
-            if (currentPhrase[i] === letter) {
-                const selectedLetter = document.querySelector(`${letter}`);
-            }
-        }
-     };
-
-    // checkForWin(){
-
-    // };
 
     // removeLife(){
 
