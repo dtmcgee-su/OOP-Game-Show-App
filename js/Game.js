@@ -39,15 +39,42 @@ class Game {
 
 
     checkForWin(){
+        const lettersRemaining = document.querySelectorAll('.hide');
+        if (lettersRemaining.length !== 0) {
+            return false
+        } else {
+            return true
+        }
+    };
+
+    removeLife() {
+
+        if (this.missed !== 5) {
+            const tries = document.querySelectorAll('.tries');
+            tries[this.missed].firstElementChild.src = 'images/lostHeart.png';
+            this.missed++;
+        } else {
+            this.gameOver(false);
+        }
 
     };
 
-    // removeLife(){
+    gameOver(gameWon) {
+        const endGameMessage = document.querySelector('#game-over-message');
+        // console.log(endGameMessage);
+        const overlay = document.getElementById('overlay');
+        // console.log(overlay);
+        overlay.style.display = '';
+        overlay.className = '';
+        if (gameWon){
+            endGameMessage.textContent = 'Congrats! You Won!';
+            overlay.classList.remove('start');
+            overlay.classList.add('win');
+        } else {
+            endGameMessage.textContent = 'GAME OVER. Try Again!';
+            overlay.classList.remove('start');
+            overlay.classList.add('lose');
+        }
+    };
 
-    // };
-
-    // gameOver(gameWon){
-
-    // };
-    // };
-};
+}
