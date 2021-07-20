@@ -35,9 +35,12 @@
 // console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 
 let game;
-const btn = document.getElementById('btn__reset');
+const startBtn = document.getElementById('btn__reset');
 
-btn.addEventListener('click', () => {
+startBtn.addEventListener('click', () => {
     game = new Game();
     game.startGame();
 });
+
+const letterBtns = Array.from(document.querySelectorAll('.key'));
+letterBtns.forEach(btn => btn.addEventListener('click', e =>  game.handleInteraction(e.target)));
