@@ -29,9 +29,9 @@ class Game {
         const overlay = document.getElementById('overlay');
         overlay.style.display = 'none';
         let randomPhrase = this.getRandomPhrase();
-        const addPhrase = new Phrase(randomPhrase.phrase);
-        addPhrase.addPhraseToDisplay();
-        this.activePhrase = addPhrase;
+        // const addPhrase = new Phrase(randomPhrase.phrase);
+       randomPhrase.addPhraseToDisplay();
+        this.activePhrase = randomPhrase;
         this.missed = 0;
         //console.log(overlay);
     };
@@ -41,10 +41,10 @@ class Game {
 
     checkForWin(){
         const lettersRemaining = document.querySelectorAll('.hide');
-        if (lettersRemaining.length !== 0) {
-            return false
+        if (lettersRemaining.length === 0) {
+            return true;
         } else {
-            return true
+            return false;
         }
     };
 
@@ -67,15 +67,17 @@ class Game {
         // console.log(overlay);
         overlay.style.display = '';
         overlay.className = '';
-        if (gameWon){
+        if (this.checkForWin()){
             endGameMessage.textContent = 'Congrats! You Won!';
             overlay.classList.remove('start');
             overlay.classList.add('win');
+          //  this.newGame();
+
         } else {
             endGameMessage.textContent = 'GAME OVER. Try Again!';
             overlay.classList.remove('start');
             overlay.classList.add('lose');
-            this.newGame();
+           // this.newGame();
         }
     };
 

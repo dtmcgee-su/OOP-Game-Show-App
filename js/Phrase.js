@@ -9,7 +9,7 @@ class Phrase {
 
     addPhraseToDisplay(){
          const phraseDiv = document.getElementById('phrase');
-         const phraseUsed = game.getRandomPhrase().phrase;
+         const phraseUsed = this.phrase;
          for (let i = 0; i < phraseUsed.length; i++) {
             const character =  phraseUsed[i];
             const phraseUl = document.querySelector('#phrase ul');
@@ -21,7 +21,6 @@ class Phrase {
             } else {
                 characterLi.className = `hide letter ${character}`;
            }
-
         };
  
         console.log(phraseUsed);
@@ -37,11 +36,15 @@ class Phrase {
     };
 
      showMatchedLetter(letter){
-        const characters = Array.from(document.getElementsByClassName(letter));
-        //console.log(characters);
-        characters.forEach(correctGuess => {
-            correctGuess.classList.remove('hide');
-            correctGuess.classList.add('show');
-        });
-        };
+   
+        const ul = document.querySelector('ul');
+        console.log(ul);
+        const letters = ul.children;
+        for(let i = 0; i < letters.length; i++){
+            if(letter === letters[i].textContent){
+                letters[i].classList.remove('hide');
+                letters[i].classList.add('show');
+            }
+        }
+     };
 };
