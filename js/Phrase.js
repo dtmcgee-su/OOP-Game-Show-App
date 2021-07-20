@@ -1,12 +1,8 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Phrase.js */
-
 class Phrase {
     constructor(phrase){
         this.phrase = phrase.toLowerCase();
     }
-
+    // add random pnhrase to display, only show blank for each letter (no spaces)
     addPhraseToDisplay(){
          const phraseDiv = document.getElementById('phrase');
          const phraseUsed = this.phrase;
@@ -22,11 +18,9 @@ class Phrase {
                 characterLi.className = `hide letter ${character}`;
            }
         };
- 
-        console.log(phraseUsed);
-        console.log(phraseDiv);
-    };
 
+    };
+    // if the letter guesssed is in the phrase, return true
     checkLetter(letter) {
         if (this.phrase.includes(letter)) {
             return true;
@@ -34,11 +28,9 @@ class Phrase {
             return false;
         }
     };
-
+    // reveal the places of the letter/ letters correctly guessed 
      showMatchedLetter(letter){
-   
         const ul = document.querySelector('ul');
-        console.log(ul);
         const letters = ul.children;
         for(let i = 0; i < letters.length; i++){
             if(letter === letters[i].textContent){
