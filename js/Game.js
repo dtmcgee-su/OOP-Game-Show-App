@@ -28,18 +28,14 @@ class Game {
     startGame() {
         const overlay = document.getElementById('overlay');
         overlay.style.display = 'none';
-        let randomPhrase = this.getRandomPhrase();
-        const addPhrase = new Phrase(randomPhrase.phrase);
-        addPhrase.addPhraseToDisplay();
-        this.activePhrase = addPhrase;
+        const randomPhrase = this.getRandomPhrase();
+        this.activePhrase = randomPhrase;
+        this.activePhrase.addPhraseToDisplay();
         this.missed = 0;
         //console.log(overlay);
     };
 
-    // handleInteraction() {
-
-
-    checkForWin(){
+    checkForWin() {
         const lettersRemaining = document.querySelectorAll('.hide');
         if (lettersRemaining.length === 0) {
             return true;
@@ -49,15 +45,12 @@ class Game {
     };
 
     removeLife() {
-
-        if (this.missed < 5) {
-            const tries = document.querySelectorAll('.tries');
-            tries[this.missed].firstElementChild.src = 'images/lostHeart.png';
-            this.missed++;
-        } else {
+        const tries = document.querySelectorAll('.tries');
+        tries[this.missed].firstElementChild.src = 'images/lostHeart.png';
+        this.missed++;
+        if (this.missed === 5) {
             this.gameOver(false);
         }
-
     };
 
     gameOver(gameWon) {
@@ -67,56 +60,46 @@ class Game {
         // console.log(overlay);
         overlay.style.display = '';
         overlay.className = '';
-        if (this.checkForWin()){
+        this.missed = 0;
+        if (this.checkForWin()) {
             endGameMessage.textContent = 'Congrats! You Won!';
             overlay.classList.remove('start');
             overlay.classList.add('win');
-          //  this.newGame();
+            // this.newGame();
 
         } else {
             endGameMessage.textContent = 'GAME OVER. Try Again!';
             overlay.classList.remove('start');
             overlay.classList.add('lose');
-           // this.newGame();
+            // this.newGame();
+        }
+
+        document.querySelector('#phrase ul').innerHTML = '';
+        const letterButtons = document.querySelectorAll('button');
+        for (let i = 0; i < letterButtons.length; i++) {
+            letterButtons[i].removeAttribute('disabled');
+            letterButtons[i].classList.remove('wrong');
+            letterButtons[i].classList.remove('chosen');
+            letterButtons[i].disabled = false;
+        }
+        const heartIcons = document.querySelectorAll('ol img');
+        for (let i = 0; i < heartIcons.length; i++) {
+            heartIcons[i].src = 'images/liveHeart.png';
         }
     };
 
     handleInteraction(button) {
-        if (button.disable !== true) {
-            button.disable = true;
-            // console.log(button);
-            if (this.activePhrase.checkLetter(button.textContent)) {
-                button.classList.add('chosen');
-                this.activePhrase.showMatchedLetter(button.textContent);
-                if (this.checkForWin() === true) {
-                    this.gameOver(true);
-                }
-            } else {
-                button.classList.add('wrong');
-                this.removeLife();
+        button.disabled = true;
+        // console.log(button);
+        if (this.activePhrase.checkLetter(button.textContent)) {
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(button.textContent);
+            if (this.checkForWin()) {
+                this.gameOver(true);
             }
+        } else {
+            button.classList.add('wrong');
+            this.removeLife();
         }
     }
-
-    newGame() {
-        const clearList = document.querySelector('ul');
-        // const list = clearList.children;
-        // console.log(list);
-        clearList.innerHTML = '';
-        const tries = document.querySelectorAll('.tries');
-        tries.forEach(heart => heart.firstElementChild.src = 'images/liveHeart.png');
-
-        const characters = Array.from(document.getElementsByClassName('key'));
-        characters.forEach((letter) => {
-            letter.classList.remove('show');
-            letter.classList.remove('wrong');
-            letter.classList.remove('chosen');
-            letter.classList.add('hide');
-            letter.disable = false;
-        });
-        // this.missed = 0;
-        this.startGame();
-    }
-
-    
 }
